@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taskapp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= image_tag "TaskApp-logo.png" %><!-- 画像の埋め込み -->
+
+    <%= yield %>
+
+    <%= link_to "Home", projects_path %><!-- リンクの埋め込み -->
+  </body>
+</html>

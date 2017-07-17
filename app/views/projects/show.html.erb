@@ -1,0 +1,31 @@
+<h1><%= @project.title %></h1>
+
+<div class="border-head">
+  <ul>
+    <% @project.tasks.each do |task| %>
+      <li class="border-line">
+        <%= check_box_tag '','',task.done, {'data-id' => task.id, 'data-project_id' => task.project_id} %>
+        <%= task.title %>
+        <%= link_to "[Delete]", project_task_path(task.project_id, task.id), method: :delete, data: {confirm: "are you sure?"} %>
+        <p><%= image_tag task.picture.url if task.picture? %></p>
+      </li>
+
+    <% end %>
+
+    <li class="input-form">
+      <%= form_for [@project, @project.tasks.build] do |f| %>
+      <%= f.text_field :title %>
+      <%= f.submit %>
+      <p><%= f.file_field :picture %></p>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<script>
+$(function(){
+  $("input[type=checkbox]").click(function() {
+      $.post('/projects/'+$(this).data('project_id')+'/tasks/'+$(this).data('id')+'/toggle');
+  });
+});
+</script>
